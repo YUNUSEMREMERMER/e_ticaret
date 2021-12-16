@@ -1,5 +1,6 @@
 import 'package:e_ticaret/category.dart';
 import 'package:e_ticaret/components/bottom_navigation.dart';
+import 'package:e_ticaret/components/header.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesPage extends StatelessWidget {
@@ -23,24 +24,7 @@ class CategoriesPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 29.0,
-                    ),
-                    Icon(
-                      Icons.arrow_back,
-                      color: Color(0xFF0A1034),
-                      size: 27.0,
-                    ),
-                    SizedBox(
-                      height: 29.0,
-                    ),
-                    Text(
-                      "Categories",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24.0,
-                          color: Color(0xFF0A1034)),
-                    ),
+                    header("Categories", context),
                     SizedBox(
                       height: 16.0,
                     ),
@@ -53,7 +37,7 @@ class CategoriesPage extends StatelessWidget {
                     )
                   ],
                 )),
-                bottomNavigationBar(),
+                bottomNavigationBar("search"),
           ],
           
         ),
