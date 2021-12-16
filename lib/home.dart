@@ -1,3 +1,5 @@
+import 'package:e_ticaret/categories.dart';
+import 'package:e_ticaret/components/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,7 +29,7 @@ class _HomePageState extends State<HomePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      buildButton(text: "Categories", icon: Icons.menu),
+                      buildButton(text: "Categories", icon: Icons.menu , widget: CategoriesPage(),context: context),
                       buildButton(text: "Favorites", icon: Icons.star_border),
                       buildButton(text: "Gifts", icon: Icons.card_giftcard),
                       buildButton(text: "Best selling", icon: Icons.people),
@@ -79,42 +81,12 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Color(0xFFEFF5FB),
-                boxShadow: [
-                  BoxShadow(blurRadius: 10,
-                  offset: Offset(0,-3),
-                  color:Colors.black.withOpacity(0.25)
-                  )
-                ]
-              ),
-              width: double.infinity,
-              padding:EdgeInsets.symmetric(vertical: 20.0),
-              
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                
-                buildNavIcon(iconData: Icons.home_filled,active: true),
-                buildNavIcon(iconData: Icons.search,active: false),
-                buildNavIcon(iconData: Icons.shopping_basket,active: false),
-                buildNavIcon(iconData: Icons.person,active: false),
-              ],),
-            ),
-          )
+          bottomNavigationBar(),
 
         ],
       ),
     ));
   }
-
-  Widget buildNavIcon({@required IconData? iconData , @required bool? active}){
-    return Icon(iconData,size: 20.0,color: Color(active! ? 0xFF0001FC : 0xFF0A1034) ,);
-
-  } 
 }
 
 Widget buildSalesItem(
