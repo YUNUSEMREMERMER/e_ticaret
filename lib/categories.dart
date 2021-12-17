@@ -33,10 +33,13 @@ class CategoriesPage extends StatelessWidget {
                         children: categories
                             .map((String title) => buildCategory(title,context))
                             .toList(),
+                            
                       ),
-                    )
+                    ),
+                    SizedBox(height: 70.0,)
                   ],
                 )),
+                
                 bottomNavigationBar("search"),
           ],
           

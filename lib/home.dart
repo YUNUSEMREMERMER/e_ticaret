@@ -1,6 +1,8 @@
+
 import 'package:e_ticaret/categories.dart';
 import 'package:e_ticaret/components/bottom_navigation.dart';
 import 'package:e_ticaret/components/label.dart';
+import 'package:e_ticaret/product_detail.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,7 +23,6 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: ListView(
-              
               children: [
                 buildTitle(),
                 buildBanner(),
@@ -30,7 +31,11 @@ class _HomePageState extends State<HomePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      buildButton(text: "Categories", icon: Icons.menu , widget: CategoriesPage(),context: context),
+                      buildButton(
+                          text: "Categories",
+                          icon: Icons.menu,
+                          widget: CategoriesPage(),
+                          context: context),
                       buildButton(text: "Favorites", icon: Icons.star_border),
                       buildButton(text: "Gifts", icon: Icons.card_giftcard),
                       buildButton(text: "Best selling", icon: Icons.people),
@@ -55,12 +60,12 @@ class _HomePageState extends State<HomePage> {
                         text: "smartphones",
                         photoUrl: "assets/images/telefon.png",
                         discount: "-%50",
-                        screenWidth: screenWidth),
+                        screenWidth: screenWidth,context: context),
                     buildSalesItem(
                         text: "smartphones",
                         photoUrl: "assets/images/telefon.png",
                         discount: "-%50",
-                        screenWidth: screenWidth),
+                        screenWidth: screenWidth,context: context),
                   ],
                 ),
                 Row(
@@ -70,20 +75,19 @@ class _HomePageState extends State<HomePage> {
                         text: "smartphones",
                         photoUrl: "assets/images/telefon.png",
                         discount: "-%50",
-                        screenWidth: screenWidth),
+                        screenWidth: screenWidth,context: context),
                     buildSalesItem(
                         text: "smartphones",
                         photoUrl: "assets/images/telefon.png",
                         discount: "-%50",
-                        screenWidth: screenWidth),
+                        screenWidth: screenWidth,context: context),
                   ],
                 ),
+                SizedBox(height: 100.0)
               ],
             ),
           ),
-
           bottomNavigationBar("home"),
-
         ],
       ),
     ));
@@ -94,29 +98,36 @@ Widget buildSalesItem(
     {@required String? text,
     @required String? photoUrl,
     @required String? discount,
-    @required double? screenWidth}) {
-  return Container(
-    
-    width: (screenWidth! - 60.0) * 0.5,
-    padding: EdgeInsets.only(left: 12.0, top: 12.0, bottom: 21.0, right: 12.0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Label(discount!),
-        Center(
-          child: Image.asset(
-            photoUrl!,
-            width: 100.7,
-            height: 130.0,
+    @required double? screenWidth,
+    context}) {
+  return GestureDetector(
+    onTap: () {
+      Navigator.push(context!, MaterialPageRoute(builder: (context) {
+        return ProductDetailPage(text!);
+      }));
+    },
+    child: Container(
+      width: (screenWidth! - 60.0) * 0.5,
+      padding: EdgeInsets.only(left: 12.0, top: 12.0, bottom: 21.0, right: 12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Label(discount!),
+          Center(
+            child: Image.asset(
+              photoUrl!,
+              width: 100.7,
+              height: 130.0,
+            ),
           ),
-        ),
-        Center(
-          child: Text(
-            text!,
-            style: TextStyle(fontSize: 18.0, color: Color(0xFF0A1034)),
-          ),
-        )
-      ],
+          Center(
+            child: Text(
+              text!,
+              style: TextStyle(fontSize: 18.0, color: Color(0xFF0A1034)),
+            ),
+          )
+        ],
+      ),
     ),
   );
 }
