@@ -49,7 +49,7 @@ class CategoriesPage extends StatelessWidget {
     return GestureDetector(
       onTap: () {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return CategoryPage();
+        return CategoryPage(title);
       }));
     },
       child: Container(

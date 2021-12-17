@@ -1,8 +1,13 @@
 import 'package:e_ticaret/components/bottom_navigation.dart';
 import 'package:e_ticaret/components/header.dart';
+import 'package:e_ticaret/product_detail.dart';
 import 'package:flutter/material.dart';
 
 class CategoryPage extends StatelessWidget {
+
+  String categoryTitle;
+
+  CategoryPage(this.categoryTitle);
   
   List<Map> products = [
     {"isim":"Surface laptop 1","fotograf":"assets/images/telefon.png","fiyat":"999"},
@@ -24,7 +29,7 @@ class CategoryPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  header("Laptop", context),
+                  header(categoryTitle, context),
                   SizedBox(
                     height: 32.0,
                   ),
@@ -35,7 +40,7 @@ class CategoryPage extends StatelessWidget {
                     mainAxisSpacing: 10.0,
                     children: products.map((Map product) {
                       return buildContent(
-                        product["isim"], product["fotograf"], product["fiyat"]);
+                        product["isim"], product["fotograf"], product["fiyat"],context);
                     }).toList(),
                     ),
                   )
@@ -53,52 +58,59 @@ class CategoryPage extends StatelessWidget {
   }
 }
 
-Widget buildContent(String title, String photoUrl, String price) {
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
-    decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(6.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 24.0,
-            offset: Offset(0, 16),
+Widget buildContent(String title, String photoUrl, String price,context) {
+  return GestureDetector(
+    onTap: (){
+      Navigator.push(context, MaterialPageRoute(builder: (context){
+        return ProductDetailPage(title);
+      }));
+    },
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(6.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: 24.0,
+              offset: Offset(0, 16),
+            )
+          ]),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 9.0,
+          ),
+          Image.asset(
+            photoUrl,
+            width: 150.0,
+            height: 100.0,
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16.0,
+                    color: Color(0xFF0A1034)),
+              ),
+              Text(
+                "USD $price",
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12.0,
+                    color: Color(0xFF0001FC)),
+              ),
+            ],
           )
-        ]),
-    child: Column(
-      children: [
-        SizedBox(
-          height: 9.0,
-        ),
-        Image.asset(
-          photoUrl,
-          width: 150.0,
-          height: 100.0,
-        ),
-        SizedBox(
-          height: 10.0,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16.0,
-                  color: Color(0xFF0A1034)),
-            ),
-            Text(
-              "USD $price",
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 12.0,
-                  color: Color(0xFF0001FC)),
-            ),
-          ],
-        )
-      ],
+        ],
+      ),
     ),
   );
 }

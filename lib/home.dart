@@ -1,5 +1,6 @@
 import 'package:e_ticaret/categories.dart';
 import 'package:e_ticaret/components/bottom_navigation.dart';
+import 'package:e_ticaret/components/label.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -101,17 +102,7 @@ Widget buildSalesItem(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          padding: EdgeInsets.all(4.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(2.0),
-            color: Color(0xFFE0ECF8),
-          ),
-          child: Text(
-            discount!,
-            style: TextStyle(color: Color(0xFF1F53E4), fontSize: 12.0),
-          ),
-        ),
+        Label(discount!),
         Center(
           child: Image.asset(
             photoUrl!,
